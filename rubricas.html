@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto El Sabio - Carga de Rúbricas</title>
+    <link  rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="form-body">
+        <img src=".\assets\images\logo.png" alt="Logo de mi sitio web">
+        <p class="text">¿Qué desea realizar?</p>       
+
+        <form class="opciones-form" method="post">
+            <button type="cargaContenido">Cargar Contenidos</button>
+            <button type="rubricaEstudiante">Rúbrica por Estudiante</button>
+            
+        </form>
+
+    </div>
+
+    <script>
+        // Obtener todos los botones dentro del formulario por su etiqueta 'button'
+        const buttons = document.querySelectorAll('.opciones-form button');
+
+        // Iterar sobre cada botón para agregar un event listener a cada uno
+        buttons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Obtener el tipo del botón clickeado
+                const buttonType = this.getAttribute('type');
+
+                // Realizar acciones basadas en el tipo de botón
+                if (buttonType === 'cargaContenido') {
+                    window.location.href = 'contenidos.html';
+                    //alert("Ya están cargados los contenidos");
+                } else if (buttonType === 'rubricaEstudiante') {
+                    alert("Sitio en construcción");
+                }
+
+                // Evitar el comportamiento predeterminado del botón (enviar formulario)
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

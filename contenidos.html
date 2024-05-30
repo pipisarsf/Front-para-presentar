@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <title>Instituto el Sabio</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="form-body">
+        <img src="assets/images/logo.png" alt="logo institucional">
+        <p class="text">Carga de Contenidos</p>
+
+        <form class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
+            <label for="materia">Materia:</label>
+            <select name="materia" id="materia" required>
+                <option value="">Seleccione una materia</option>
+            </select>
+            <br>
+            
+            <label for="contenido">Contenido:</label>
+            <select name="contenido" id="contenido" required>
+                <option value="">Seleccione un contenido</option>
+            </select>
+            <br>
+
+            <label for="alumno">Estudiante:</label>
+            <select name="alumno" id="alumno" required>
+                <option value="">Seleccione el estudiante</option>
+            </select>
+            <br>
+
+            <label for="estadoContenido">Nivel de Desempeño:</label>
+            <select name="estadoContenido" id="estadoContenido" required>
+                <option value="">Seleccione un nivel de desempeño</option>
+                
+                <option value="Altamente Logrado">Altamente Logrado</option>
+                <option value="Logrado">Logrado</option>
+                <option value="Escasamente Logrado">Escasamente Logrado</option>
+                <option value="Pendiente">Pendiente</option>
+            </select>
+            <br>
+
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+   
+    <script>
+        // Función para llenar las opciones de una lista desplegable
+        function llenarOpciones(lista, datos) {
+            const select = document.getElementById(lista);
+            select.innerHTML = '<option value="">Seleccione una opción</option>'; // Reset options
+            datos.forEach(dato => {
+                const option = document.createElement("option");
+                option.text = dato.nombre_materia || dato.nombre_contenido || dato.nombre;
+                option.value = dato.id;
+                select.add(option);
+            });
+        }
+
+        // Llenar las listas desplegables con datos de la base de datos al cargar la página
+        window.onload = function() {
+            // Obtener los datos de la base de datos
+            fetch('obtener_datos.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta de la red");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    console.error('Error en los datos recibidos:', data.error);
+                    return;
+                }
+                
+                // Llenar las listas desplegables
+                llenarOpciones("materia", data.asignaturas);
+                llenarOpciones("alumno", data.estudiantes);
+
+                // Guardar los contenidos en una variable global
+                window.contenidos = data.contenidos;
+
+                // Filtrar y llenar los contenidos al cargar la página
+                const materiaId = document.getElementById("materia").value;
+                const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
+                llenarOpciones("contenido", contenidosFiltrados);
+
+                // Imprimir en consola los datos del docente
+                console.log("Datos del docente:", data.docente);
+            })
+            .catch(error => console.error('Error al obtener los datos:', error));
+
+            // Añadir evento para actualizar los contenidos cuando se seleccione una materia
+            document.getElementById("materia").addEventListener("change", function() {
+                const materiaId = this.value;
+                const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
+                llenarOpciones("contenido", contenidosFiltrados);
+            });
+        };
+
+
+
+        
+    </script>
+</body>
+</html>

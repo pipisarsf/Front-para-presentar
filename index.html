@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <title>Inicio de sesión</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="form-body">
+        <img src="assets/images/logo.png" alt="logo institucional">
+        <p class="text">Iniciar sesión</p> 
+        <form action="validar.php" method="POST" autocomplete="on">
+
+            <input type="text" id="username" name="nombre" placeholder="Nombre de usuario" required>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required>
+
+            <!--  <input type="email" id="email" name="email" placeholder="Correo Electrónico" required> -->
+
+            <a href="password.html">Olvidé mi contraseña</a>
+
+            <!--BOTONES-->
+            <button type="submit">Iniciar sesión</button>
+            <!-- <button type="submit" name="send" value= "Registro">Registrarse</button> -->
+        </form>
+    </div>
+</body>
+</html>
