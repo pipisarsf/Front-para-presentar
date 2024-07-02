@@ -7,17 +7,14 @@ if (isset($_POST['materia'], $_POST['contenido'], $_POST['alumno'], $_POST['esta
     $alumno_id = $_POST['alumno'];
     $estadoContenido = $_POST['estadoContenido'];
 
-    $conn = mysqli_connect("localhost", "root", "", "practicaprofesional");
-    if (!$conn) {
-        die("Error de conexión: " . mysqli_connect_error());
-    }
+    include("conexion.php");
 
     // Verificar si ya existe un registro con la misma materia, contenido y estudiante
     $consulta_verificar = "SELECT * FROM contenido_estudiante WHERE contenido_id = ? AND estudiante_id = ?";
-    $stmt_verificar = mysqli_prepare($conn, $consulta_verificar);
+    $stmt_verificar = mysqli_prepare($conex, $consulta_verificar);
 
     if (!$stmt_verificar) {
-        die("Error en la preparación de la consulta de verificación: " . mysqli_error($conn));
+        die("Error en la preparación de la consulta de verificación: " . mysqli_error($conex));
     }
 
     mysqli_stmt_bind_param($stmt_verificar, "ii", $contenido_id, $alumno_id);
@@ -25,15 +22,15 @@ if (isset($_POST['materia'], $_POST['contenido'], $_POST['alumno'], $_POST['esta
     $resultado_verificar = mysqli_stmt_get_result($stmt_verificar);
 
     if (!$resultado_verificar) {
-        echo "Error en la consulta de verificación: " . mysqli_error($conn);
+        echo "Error en la consulta de verificación: " . mysqli_error($conex);
     } else {
         if (mysqli_num_rows($resultado_verificar) == 0) {
             // Insertar los datos en la tabla contenido_estudiante
             $consulta_insertar = "INSERT INTO contenido_estudiante (contenido_id, estudiante_id, nivel_desempeno) VALUES (?, ?, ?)";
-            $stmt_insertar = mysqli_prepare($conn, $consulta_insertar);
+            $stmt_insertar = mysqli_prepare($conex, $consulta_insertar);
             
             if (!$stmt_insertar) {
-                die("Error en la preparación de la consulta de inserción: " . mysqli_error($conn));
+                die("Error en la preparación de la consulta de inserción: " . mysqli_error($conex));
             }
             
             mysqli_stmt_bind_param($stmt_insertar, "iis", $contenido_id, $alumno_id, $estadoContenido);
@@ -41,7 +38,7 @@ if (isset($_POST['materia'], $_POST['contenido'], $_POST['alumno'], $_POST['esta
             if (mysqli_stmt_execute($stmt_insertar)) {
                 echo "Datos guardados correctamente.";
             } else {
-                echo "Error al guardar los datos: " . mysqli_error($conn);
+                echo "Error al guardar los datos: " . mysqli_error($conex);
             }
 
             mysqli_stmt_close($stmt_insertar);
@@ -52,9 +49,8 @@ if (isset($_POST['materia'], $_POST['contenido'], $_POST['alumno'], $_POST['esta
         mysqli_stmt_close($stmt_verificar);
     }
 
-    mysqli_close($conn);
+    mysqli_close($conex);
 } else {
     echo "No se han recibido los datos correctamente.";
 }
 ?>
-
