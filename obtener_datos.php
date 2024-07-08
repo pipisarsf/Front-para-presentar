@@ -1,50 +1,72 @@
 <?php
+header('Content-Type: application/json');
 session_start();
 
-if (!isset($_SESSION['docente_id'])) {
-    echo json_encode(["error" => "Docente no autenticado"]);
-    exit();
-}
-
-$docente_id = $_SESSION['docente_id'];
-include("conexion.php");
-
-$datos = [];
+$response = [];
 
 try {
-    $query_asignatura = "SELECT id, nombre_materia FROM asignatura WHERE docente_id = $docente_id";
-    $result_asignatura = mysqli_query($conex, $query_asignatura);
-    if (!$result_asignatura) {
-        throw new Exception("Error al ejecutar la consulta de asignaturas: " . mysqli_error($conex));
+    $conn = new mysqli("localhost", "root", "", "practicaprofesional");
+    if ($conn->connect_error) {
+        throw new Exception("Error de conexión: " . $conn->connect_error);
     }
-    $datos['asignaturas'] = mysqli_fetch_all($result_asignatura, MYSQLI_ASSOC);
 
-    $query_estudiante = "SELECT id, nombre FROM estudiante";
-    $result_estudiante = mysqli_query($conex, $query_estudiante);
-    if (!$result_estudiante) {
-        throw new Exception("Error al ejecutar la consulta de estudiantes: " . mysqli_error($conex));
+    // Consulta para obtener asignaturas
+    $asignaturas_result = $conn->query("SELECT id, nombre FROM asignatura");
+    if (!$asignaturas_result) {
+        throw new Exception("Error en la consulta de asignaturas: " . $conn->error);
     }
-    $datos['estudiantes'] = mysqli_fetch_all($result_estudiante, MYSQLI_ASSOC);
 
-    $query_contenidos = "SELECT id, nombre_contenido, materia_id FROM contenidos";
-    $result_contenidos = mysqli_query($conex, $query_contenidos);
-    if (!$result_contenidos) {
-        throw new Exception("Error al ejecutar la consulta de contenidos: " . mysqli_error($conex));
+    $asignaturas = [];
+    while ($row = $asignaturas_result->fetch_assoc()) {
+        $asignaturas[] = $row;
     }
-    $datos['contenidos'] = mysqli_fetch_all($result_contenidos, MYSQLI_ASSOC);
+    $response['asignaturas'] = $asignaturas;
 
-    $query_docente = "SELECT id, nombre FROM docente WHERE id = $docente_id";
-    $result_docente = mysqli_query($conex, $query_docente);
-    if (!$result_docente) {
-        throw new Exception("Error al ejecutar la consulta del docente: " . mysqli_error($conex));
+    // Consulta para obtener contenidos
+    $contenidos_result = $conn->query("SELECT id, nombre_contenido, materia_id FROM contenido");
+    if (!$contenidos_result) {
+        throw new Exception("Error en la consulta de contenidos: " . $conn->error);
     }
-    $datos['docente'] = mysqli_fetch_assoc($result_docente);
 
-    echo json_encode($datos);
+    $contenidos = [];
+    while ($row = $contenidos_result->fetch_assoc()) {
+        $contenidos[] = $row;
+    }
+    $response['contenidos'] = $contenidos;
 
+    // Consulta para obtener estudiantes
+    $estudiantes_result = $conn->query("SELECT id, nombre FROM estudiante");
+    if (!$estudiantes_result) {
+        throw new Exception("Error en la consulta de estudiantes: " . $conn->error);
+    }
+
+    $estudiantes = [];
+    while ($row = $estudiantes_result->fetch_assoc()) {
+        $estudiantes[] = $row;
+    }
+    $response['estudiantes'] = $estudiantes;
+
+    // Consulta para obtener datos del docente actual
+    if (isset($_SESSION['docente_id'])) {
+        $docente_id = $_SESSION['docente_id'];
+        $docente_result = $conn->query("SELECT nombre FROM docente WHERE id = $docente_id");
+        if (!$docente_result) {
+            throw new Exception("Error en la consulta de docente: " . $conn->error);
+        }
+
+        $docente = $docente_result->fetch_assoc();
+        $response['docente'] = $docente;
+    } else {
+        $response['docente'] = null;
+    }
+
+    echo json_encode($response);
 } catch (Exception $e) {
-    echo json_encode(["error" => $e->getMessage()]);
+    $response['error'] = $e->getMessage();
+    echo json_encode($response);
 } finally {
-    mysqli_close($conex);
+    if (isset($conn) && $conn->connected) {
+        $conn->close();
+    }
 }
 ?>
