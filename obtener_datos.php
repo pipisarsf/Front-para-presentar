@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: application/json');
 session_start();
+ob_start(); // Inicia el almacenamiento en búfer de salida
 
 $response = [];
 
@@ -11,7 +12,7 @@ try {
     }
 
     // Consulta para obtener asignaturas
-    $asignaturas_result = $conn->query("SELECT id, nombre FROM asignatura");
+    $asignaturas_result = $conn->query("SELECT id, nombre_materia FROM asignatura");
     if (!$asignaturas_result) {
         throw new Exception("Error en la consulta de asignaturas: " . $conn->error);
     }
@@ -23,7 +24,7 @@ try {
     $response['asignaturas'] = $asignaturas;
 
     // Consulta para obtener contenidos
-    $contenidos_result = $conn->query("SELECT id, nombre_contenido, materia_id FROM contenido");
+    $contenidos_result = $conn->query("SELECT id, nombre_contenido, materia_id FROM contenidos");
     if (!$contenidos_result) {
         throw new Exception("Error en la consulta de contenidos: " . $conn->error);
     }
@@ -60,12 +61,14 @@ try {
         $response['docente'] = null;
     }
 
+    ob_end_clean(); // Limpia el búfer de salida y desactiva el almacenamiento en búfer
     echo json_encode($response);
 } catch (Exception $e) {
+    ob_end_clean(); // Limpia el búfer de salida y desactiva el almacenamiento en búfer
     $response['error'] = $e->getMessage();
     echo json_encode($response);
 } finally {
-    if (isset($conn) && $conn->connected) {
+    if (isset($conn) && $conn->connect_errno == 0) {
         $conn->close();
     }
 }

@@ -12,7 +12,7 @@
         <p class="text">Carga de Contenidos</p>
 
         <form class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
-            <label for="materia">Materia:</label>
+            <label for="materia">Asignatura:</label>
             <select name="materia" id="materia" required>
                 <option value="">Seleccione una asignatura</option>
             </select>
@@ -50,7 +50,7 @@
             select.innerHTML = '<option value="">Seleccione una opción</option>';
             datos.forEach(dato => {
                 const option = document.createElement("option");
-                option.text = dato.nombre_asignatura || dato.nombre_contenido || dato.nombre;
+                option.text = dato.nombre_materia || dato.nombre_contenido || dato.nombre;
                 option.value = dato.id;
                 select.add(option);
             });
