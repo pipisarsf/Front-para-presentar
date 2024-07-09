@@ -57,7 +57,7 @@
                 });
             }
         }
-
+    
         window.onload = function() {
             fetch('obtener_datos.php')
             .then(response => {
@@ -71,21 +71,21 @@
                     console.error('Error en los datos recibidos:', data.error);
                     return;
                 }
-
+    
                 if (data.asignatura) {
                     llenarOpciones("materia", data.asignatura);
                 } else {
-                    llenarOpciones("materia", [{ id: "", nombre_asignatura: "No hay asignaturas disponibles" }]);
+                    llenarOpciones("materia", [{ id: "", nombre_asignatura: "No hay asignatura disponible" }]);
                 }
-
+    
                 if (data.estudiantes) {
                     llenarOpciones("alumno", data.estudiantes);
                 } else {
                     llenarOpciones("alumno", [{ id: "", nombre: "No hay estudiantes disponibles" }]);
                 }
-
+    
                 window.contenidos = data.contenidos;
-
+    
                 document.getElementById("materia").addEventListener("change", function() {
                     const materiaId = this.value;
                     const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
@@ -95,5 +95,6 @@
             .catch(error => console.error('Error al obtener los datos:', error));
         };
     </script>
+    
 </body>
 </html>

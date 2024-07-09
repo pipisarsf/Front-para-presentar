@@ -9,11 +9,11 @@ try {
 
     $datos = ['asignatura' => [], 'contenidos' => [], 'estudiantes' => []];
 
-    $query_asignaturas = "SELECT id, nombre_asignatura FROM asignatura";
-    $result_asignaturas = mysqli_query($conn, $query_asignaturas);
-    if ($result_asignaturas) {
-        while ($row = mysqli_fetch_assoc($result_asignaturas)) {
-            $datos['asignaturas'][] = $row;
+    $query_asignatura = "SELECT id, nombre_asignatura FROM asignatura";
+    $result_asignatura = mysqli_query($conn, $query_asignatura);
+    if ($result_asignatura) {
+        while ($row = mysqli_fetch_assoc($result_asignatura)) {
+            $datos['asignatura'][] = $row;
         }
     } else {
         throw new Exception("Error al obtener asignaturas: " . mysqli_error($conn));
