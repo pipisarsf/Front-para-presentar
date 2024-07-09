@@ -72,8 +72,6 @@
                     return;
                 }
 
-                console.log(data); // Agrega esta línea para depurar
-
                 if (data.asignatura) {
                     llenarOpciones("materia", data.asignatura);
                 } else {
@@ -88,19 +86,13 @@
 
                 window.contenidos = data.contenidos;
 
-                const materiaId = document.getElementById("materia").value;
-                const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
-                llenarOpciones("contenido", contenidosFiltrados);
-
-                console.log("Datos del docente:", data.docente);
+                document.getElementById("materia").addEventListener("change", function() {
+                    const materiaId = this.value;
+                    const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
+                    llenarOpciones("contenido", contenidosFiltrados);
+                });
             })
             .catch(error => console.error('Error al obtener los datos:', error));
-
-            document.getElementById("materia").addEventListener("change", function() {
-                const materiaId = this.value;
-                const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
-                llenarOpciones("contenido", contenidosFiltrados);
-            });
         };
     </script>
 </body>

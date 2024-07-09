@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_POST['nombre'], $_POST['password'])) {
+if(isset($_POST['nombre']) && isset($_POST['password'])) {
     $username = $_POST['nombre'];
     $password = $_POST['password'];
 
