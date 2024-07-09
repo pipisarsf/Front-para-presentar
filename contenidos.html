@@ -48,12 +48,14 @@
         function llenarOpciones(lista, datos) {
             const select = document.getElementById(lista);
             select.innerHTML = '<option value="">Seleccione una opción</option>';
-            datos.forEach(dato => {
-                const option = document.createElement("option");
-                option.text = dato.nombre_materia || dato.nombre_contenido || dato.nombre;
-                option.value = dato.id;
-                select.add(option);
-            });
+            if (datos) {
+                datos.forEach(dato => {
+                    const option = document.createElement("option");
+                    option.text = dato.nombre_asignatura || dato.nombre_contenido || dato.nombre;
+                    option.value = dato.id;
+                    select.add(option);
+                });
+            }
         }
 
         window.onload = function() {
@@ -70,8 +72,19 @@
                     return;
                 }
 
-                llenarOpciones("materia", data.asignaturas);
-                llenarOpciones("alumno", data.estudiantes);
+                console.log(data); // Agrega esta línea para depurar
+
+                if (data.asignatura) {
+                    llenarOpciones("materia", data.asignatura);
+                } else {
+                    llenarOpciones("materia", [{ id: "", nombre_asignatura: "No hay asignaturas disponibles" }]);
+                }
+
+                if (data.estudiantes) {
+                    llenarOpciones("alumno", data.estudiantes);
+                } else {
+                    llenarOpciones("alumno", [{ id: "", nombre: "No hay estudiantes disponibles" }]);
+                }
 
                 window.contenidos = data.contenidos;
 

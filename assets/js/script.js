@@ -1,30 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM content loaded');
 
-    // Encuentra el formulario por clase
-    const form = document.querySelector('.login-form'); // Asegúrate de que el selector es correcto
+    const form = document.querySelector('.login-form');
 
     if (form) {
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Previene el comportamiento predeterminado
+            event.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            console.log(`Username: ${username}, Password: ${password}`); 
+            console.log(`Username: ${username}, Password: ${password}`);
 
-            // Lógica para validar el usuario
-            const usuarioValido = window.usuarios.find(user => user.usuario === username && user.contraseña === password);
-
-            if (usuarioValido) {
-                console.log('Usuario válido');
-                window.location.href = 'rubricas.html'; // Redirección en caso de éxito
-            } else {
-                console.warn('Usuario o contraseña incorrectos');
-                alert('Usuario o contraseña incorrectos'); // Alerta en caso de error
-            }
+            // Aquí debes implementar una llamada al servidor para validar el usuario
+            // Ejemplo usando fetch
+            fetch('/validar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'rubricas.html';
+                } else {
+                    console.warn('Usuario o contraseña incorrectos');
+                    alert('Usuario o contraseña incorrectos');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
     } else {
-        console.error('Formulario no encontrado'); 
+        console.error('Formulario no encontrado');
     }
 });
