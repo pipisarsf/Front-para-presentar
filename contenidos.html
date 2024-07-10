@@ -48,13 +48,17 @@
         function llenarOpciones(lista, datos) {
             const select = document.getElementById(lista);
             select.innerHTML = '<option value="">Seleccione una opción</option>';
-            if (datos) {
+            if (datos && datos.length > 0) {
                 datos.forEach(dato => {
                     const option = document.createElement("option");
                     option.text = dato.nombre_asignatura || dato.nombre_contenido || dato.nombre;
                     option.value = dato.id;
                     select.add(option);
                 });
+            } else {
+                const option = document.createElement("option");
+                option.text = "No hay opciones disponibles";
+                select.add(option);
             }
         }
     
@@ -72,17 +76,8 @@
                     return;
                 }
     
-                if (data.asignatura) {
-                    llenarOpciones("materia", data.asignatura);
-                } else {
-                    llenarOpciones("materia", [{ id: "", nombre_asignatura: "No hay asignatura disponible" }]);
-                }
-    
-                if (data.estudiantes) {
-                    llenarOpciones("alumno", data.estudiantes);
-                } else {
-                    llenarOpciones("alumno", [{ id: "", nombre: "No hay estudiantes disponibles" }]);
-                }
+                llenarOpciones("materia", data.asignaturas);
+                llenarOpciones("alumno", data.estudiantes);
     
                 window.contenidos = data.contenidos;
     
@@ -95,6 +90,7 @@
             .catch(error => console.error('Error al obtener los datos:', error));
         };
     </script>
+    
     
 </body>
 </html>
