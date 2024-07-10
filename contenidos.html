@@ -19,19 +19,19 @@
             <br>
             
             <label for="contenido">Contenido:</label>
-            <select name="contenido" id="contenido" required>
+            <select name="contenido_id" id="contenido" required>
                 <option value="">Seleccione un contenido</option>
             </select>
             <br>
 
             <label for="alumno">Estudiante:</label>
-            <select name="alumno" id="alumno" required>
+            <select name="estudiante_id" id="alumno" required>
                 <option value="">Seleccione el estudiante</option>
             </select>
             <br>
 
             <label for="estadoContenido">Nivel de Desempeño:</label>
-            <select name="estadoContenido" id="estadoContenido" required>
+            <select name="nivel_desempeno" id="estadoContenido" required>
                 <option value="">Seleccione un nivel de desempeño</option>
                 <option value="Altamente Logrado">Altamente Logrado</option>
                 <option value="Logrado">Logrado</option>
@@ -61,7 +61,7 @@
                 select.add(option);
             }
         }
-    
+
         window.onload = function() {
             fetch('obtener_datos.php')
             .then(response => {
@@ -71,16 +71,16 @@
                 return response.json();
             })
             .then(data => {
-                if (data.error) {
-                    console.error('Error en los datos recibidos:', data.error);
+                if (data.success === false) {
+                    console.error('Error en los datos recibidos:', data.message);
                     return;
                 }
-    
+
                 llenarOpciones("materia", data.asignaturas);
                 llenarOpciones("alumno", data.estudiantes);
-    
+
                 window.contenidos = data.contenidos;
-    
+
                 document.getElementById("materia").addEventListener("change", function() {
                     const materiaId = this.value;
                     const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
@@ -90,7 +90,5 @@
             .catch(error => console.error('Error al obtener los datos:', error));
         };
     </script>
-    
-    
 </body>
 </html>
