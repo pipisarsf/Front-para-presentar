@@ -1,56 +1,69 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 
-if (isset($_POST['materia'], $_POST['contenido'], $_POST['alumno'], $_POST['estadoContenido'])) {
-    $materia_id = $_POST['materia'];
-    $contenido_id = $_POST['contenido'];
-    $alumno_id = $_POST['alumno'];
-    $estadoContenido = $_POST['estadoContenido'];
+$response = ['success' => false, 'message' => ''];
 
-    include("conexion.php");
-
-    // Verificar si ya existe un registro con la misma materia, contenido y estudiante
-    $consulta_verificar = "SELECT * FROM contenido_estudiante WHERE contenido_id = ? AND estudiante_id = ?";
-    $stmt_verificar = mysqli_prepare($conex, $consulta_verificar);
-
-    if (!$stmt_verificar) {
-        die("Error en la preparación de la consulta de verificación: " . mysqli_error($conex));
+try {
+    // Verificar datos recibidos
+    if (!isset($_POST['contenido_id'], $_POST['estudiante_id'], $_POST['nivel_desempeno'])) {
+        throw new Exception("Datos incompletos.");
     }
 
-    mysqli_stmt_bind_param($stmt_verificar, "ii", $contenido_id, $alumno_id);
-    mysqli_stmt_execute($stmt_verificar);
-    $resultado_verificar = mysqli_stmt_get_result($stmt_verificar);
+    // Obtener y limpiar datos del formulario
+    $contenido_id = (int)$_POST['contenido_id'];
+    $estudiante_id = (int)$_POST['estudiante_id'];
+    $nivel_desempeno = $_POST['nivel_desempeno'];
 
-    if (!$resultado_verificar) {
-        echo "Error en la consulta de verificación: " . mysqli_error($conex);
-    } else {
-        if (mysqli_num_rows($resultado_verificar) == 0) {
-            // Insertar los datos en la tabla contenido_estudiante
-            $consulta_insertar = "INSERT INTO contenido_estudiante (contenido_id, estudiante_id, nivel_desempeno) VALUES (?, ?, ?)";
-            $stmt_insertar = mysqli_prepare($conex, $consulta_insertar);
-            
-            if (!$stmt_insertar) {
-                die("Error en la preparación de la consulta de inserción: " . mysqli_error($conex));
-            }
-            
-            mysqli_stmt_bind_param($stmt_insertar, "iis", $contenido_id, $alumno_id, $estadoContenido);
-            
-            if (mysqli_stmt_execute($stmt_insertar)) {
-                echo "Datos guardados correctamente.";
-            } else {
-                echo "Error al guardar los datos: " . mysqli_error($conex);
-            }
-
-            mysqli_stmt_close($stmt_insertar);
-        } else {
-            echo "Ya existe un registro para esta combinación de materia, contenido y estudiante.";
-        }
-
-        mysqli_stmt_close($stmt_verificar);
+    // Conectar a la base de datos
+    $conn = new mysqli("localhost", "root", "", "practicaprofesional");
+    if ($conn->connect_error) {
+        throw new Exception("Error de conexión: " . $conn->connect_error);
     }
 
-    mysqli_close($conex);
-} else {
-    echo "No se han recibido los datos correctamente.";
+    // Verificar si el contenido existe en la tabla contenidos
+    $stmt_contenido = $conn->prepare("SELECT id FROM contenidos WHERE id = ?");
+    $stmt_contenido->bind_param("i", $contenido_id);
+    if (!$stmt_contenido->execute()) {
+        throw new Exception("Error al verificar el contenido: " . $stmt_contenido->error);
+    }
+    $resultado_contenido = $stmt_contenido->get_result();
+    if ($resultado_contenido->num_rows === 0) {
+        throw new Exception("Error: El contenido con ID $contenido_id no existe.");
+    }
+
+    // Verificar si el estudiante existe en la tabla estudiante
+    $stmt_estudiante = $conn->prepare("SELECT id FROM estudiante WHERE id = ?");
+    $stmt_estudiante->bind_param("i", $estudiante_id);
+    if (!$stmt_estudiante->execute()) {
+        throw new Exception("Error al verificar el estudiante: " . $stmt_estudiante->error);
+    }
+    $resultado_estudiante = $stmt_estudiante->get_result();
+    if ($resultado_estudiante->num_rows === 0) {
+        throw new Exception("Error: El estudiante con ID $estudiante_id no existe.");
+    }
+
+    // Insertar datos en la tabla contenido_estudiante
+    $stmt = $conn->prepare("INSERT INTO contenido_estudiante (contenido_id, estudiante_id, nivel_desempeno) VALUES (?, ?, ?)");
+    $stmt->bind_param("iis", $contenido_id, $estudiante_id, $nivel_desempeno);
+    if (!$stmt->execute()) {
+        throw new Exception("Error al guardar los datos: " . $stmt->error);
+    }
+
+    // Éxito
+    $response['success'] = true;
+    $response['message'] = 'Datos guardados exitosamente.';
+
+    // Cerrar conexiones y sentencias preparadas
+    $stmt_contenido->close();
+    $stmt_estudiante->close();
+    $stmt->close();
+    $conn->close();
+} catch (Exception $e) {
+    // Manejar errores
+    $response['message'] = $e->getMessage();
 }
+
+// Devolver respuesta JSON
+echo json_encode($response);
 ?>
