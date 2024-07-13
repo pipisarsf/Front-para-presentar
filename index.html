@@ -1,44 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="assets/images/logo.png" type="image/png">
-    <title>Instituto el Sabio</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <div class="form-container">
-            <img src="assets/images/logo.png" alt="logo institucional">
-            <p class="text">Iniciar sesión</p>
-            <form action="validar.php" method="POST" autocomplete="on">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
-                <input type="password" id="password" name="password" placeholder="Contraseña" required>
-                <button type="submit">Iniciar sesión</button>
-            </form>
-            <a href="password.html">Olvidé mi contraseña</a>
-        </div>
-        
-        <div class="info-container">
-            <div class="info-section">
-                <h2>Sobre Nosotros</h2>
-                <p>Bienvenido al Instituto El Sabio. Nos dedicamos a proporcionar educación de calidad a nuestros estudiantes. Nuestra misión es fomentar el aprendizaje y el crecimiento personal de cada alumno.</p>
-                <h3>Nuestros Valores</h3>
-                <ul class="valores">
-                    <li><button onclick="mostrarValor('Excelencia Académica')">Excelencia Académica</button></li>
-                    <li><button onclick="mostrarValor('Integridad')">Integridad</button></li>
-                    <li><button onclick="mostrarValor('Respeto')">Respeto</button></li>
-                    <li><button onclick="mostrarValor('Inclusión')">Inclusión</button></li>
-                    <li><button onclick="mostrarValor('Innovación')">Innovación</button></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" href="assets/images/logo.png" type="image/png" />
+		<title>Instituto el Sabio</title>
+		<link rel="stylesheet" href="assets/css/styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="form-container">
+				<div class="form-inicio">
+					<img src="assets/images/logo.png" alt="logo institucional" />
+					<p class="text">Ingresá tu usuario y contraseña para acceder.</p>
+				</div>
 
-    <script>
-        function mostrarValor(valor) {
-            alert('Valor seleccionado: ' + valor);
-        }
-    </script>
-</body>
+				<form action="validar.php" method="POST" autocomplete="off">
+					<div class="inputbox">
+						<input type="text" id="nombre" name="nombre" required />
+						<span>Nombre de usuario</span>
+						<i></i>
+					</div>
+					<div class="inputbox">
+						<input type="password" id="password" name="password" required />
+						<span>Contraseña</span>
+						<i></i>
+					</div>
+					<a class="forgot-password" href="password.html"
+						>¿Olvidaste tu contraseña?</a
+					>
+					<div class="btn-container">
+						<button type="submit">Iniciar sesión</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="info-container">
+				<div class="info-section">
+					<div class="info__nosotros">
+						<div class="nosotros">
+							<h2>Sobre Nosotros</h2>
+							<p>
+								Nos dedicamos a proporcionar educación de calidad a nuestros
+								estudiantes. Nuestra misión es fomentar el aprendizaje y el
+								crecimiento personal de cada alumno.
+							</p>
+						</div>
+					</div>
+					<div class="info__valores">
+						<div class="nuestros-valores">
+							<h3>Nuestros valores</h3>
+							<ul class="valores">
+								<li>
+									<button onclick="mostrarValor('Excelencia Académica')">
+										Excelencia Académica
+									</button>
+								</li>
+								<li>
+									<button onclick="mostrarValor('Integridad')">
+										Integridad
+									</button>
+								</li>
+								<li>
+									<button onclick="mostrarValor('Respeto')">Respeto</button>
+								</li>
+								<li>
+									<button onclick="mostrarValor('Inclusión')">Inclusión</button>
+								</li>
+								<li>
+									<button onclick="mostrarValor('Innovación')">
+										Innovación
+									</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function mostrarValor(valor) {
+				alert("Valor seleccionado: " + valor);
+			}
+		</script>
+	</body>
 </html>
