@@ -1,94 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="assets/images/logo.png" type="image/png">
-    <title>Instituto el Sabio</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-    <div class="form-body">
-        <img src="assets/images/logo.png" alt="logo institucional">
-        <p class="text">Carga de Contenidos</p>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" href="assets/images/logo.png" type="image/png" />
+		<title>Instituto el Sabio</title>
+		<link rel="stylesheet" href="assets/css/styles.css" />
+	</head>
+	<body>
+		<div class="container-contenidos">
+			<div class="form-body-cont">
+				<div class="cont-img">
+					<img src="assets/images/logo.png" alt="logo institucional" />
+				</div>
 
-        <form class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
-            <label for="materia">Asignatura:</label>
-            <select name="materia" id="materia" required>
-                <option value="">Seleccione una asignatura</option>
-            </select>
-            <br>
-            
-            <label for="contenido">Contenido:</label>
-            <select name="contenido_id" id="contenido" required>
-                <option value="">Seleccione un contenido</option>
-            </select>
-            <br>
+				<div class="carga">
+					<p class="text">Carga de Contenidos</p>
 
-            <label for="alumno">Estudiante:</label>
-            <select name="estudiante_id" id="alumno" required>
-                <option value="">Seleccione el estudiante</option>
-            </select>
-            <br>
+					<form
+						action="guardar_contenido.php"
+						method="POST"
+						enctype="multipart/form-data"
+						class="form-contenidos"
+					>
+						<div class="options-container">
+							<div class="opciones">
+								<label for="materia">Asignatura:</label>
+								<div class="seleccion">
+									<select name="materia" id="materia" required>
+										<option value="">Seleccione una asignatura</option>
+									</select>
+								</div>
+							</div>
 
-            <label for="estadoContenido">Nivel de Desempeño:</label>
-            <select name="nivel_desempeno" id="estadoContenido" required>
-                <option value="">Seleccione un nivel de desempeño</option>
-                <option value="Altamente Logrado">Altamente Logrado</option>
-                <option value="Logrado">Logrado</option>
-                <option value="Escasamente Logrado">Escasamente Logrado</option>
-                <option value="Pendiente">Pendiente</option>
-            </select>
-            <br>
+							<div class="opciones">
+								<label for="contenido">Contenido:</label>
+								<div class="seleccion">
+									<select name="contenido_id" id="contenido" required>
+										<option value="">Seleccione un contenido</option>
+									</select>
+								</div>
+							</div>
 
-            <button type="submit">Guardar</button>
-        </form>
-    </div>
+							<div class="opciones">
+								<label for="alumno">Estudiante:</label>
+								<div class="seleccion">
+									<select name="estudiante_id" id="alumno" required>
+										<option value="">Seleccione el estudiante</option>
+									</select>
+								</div>
+							</div>
 
-    <script>
-        function llenarOpciones(lista, datos) {
-            const select = document.getElementById(lista);
-            select.innerHTML = '<option value="">Seleccione una opción</option>';
-            if (datos && datos.length > 0) {
-                datos.forEach(dato => {
-                    const option = document.createElement("option");
-                    option.text = dato.nombre_asignatura || dato.nombre_contenido || dato.nombre;
-                    option.value = dato.id;
-                    select.add(option);
-                });
-            } else {
-                const option = document.createElement("option");
-                option.text = "No hay opciones disponibles";
-                select.add(option);
-            }
-        }
+							<div class="opciones">
+								<label for="estadoContenido">Nivel de Desempeño:</label>
+								<div class="seleccion">
+									<select name="nivel_desempeno" id="estadoContenido" required>
+										<option value="">Seleccione un nivel de desempeño</option>
+										<option value="Altamente Logrado">Altamente Logrado</option>
+										<option value="Logrado">Logrado</option>
+										<option value="Escasamente Logrado">
+											Escasamente Logrado
+										</option>
+										<option value="Pendiente">Pendiente</option>
+									</select>
+								</div>
+							</div>
+						</div>
 
-        window.onload = function() {
-            fetch('obtener_datos.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error en la respuesta de la red");
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success === false) {
-                    console.error('Error en los datos recibidos:', data.message);
-                    return;
-                }
+						<div class="button-container">
+							<a class="volver" href="rubricas.html">Volver</a>
+							<button type="submit">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
-                llenarOpciones("materia", data.asignaturas);
-                llenarOpciones("alumno", data.estudiantes);
+		<script>
+			function llenarOpciones(lista, datos) {
+				const select = document.getElementById(lista);
+				select.innerHTML = '<option value="">Seleccione una opción</option>';
+				if (datos && datos.length > 0) {
+					datos.forEach((dato) => {
+						const option = document.createElement("option");
+						option.text =
+							dato.nombre_asignatura || dato.nombre_contenido || dato.nombre;
+						option.value = dato.id;
+						select.add(option);
+					});
+				} else {
+					const option = document.createElement("option");
+					option.text = "No hay opciones disponibles";
+					select.add(option);
+				}
+			}
 
-                window.contenidos = data.contenidos;
+			window.onload = function () {
+				fetch("obtener_datos.php")
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error("Error en la respuesta de la red");
+						}
+						return response.json();
+					})
+					.then((data) => {
+						if (data.success === false) {
+							console.error("Error en los datos recibidos:", data.message);
+							return;
+						}
 
-                document.getElementById("materia").addEventListener("change", function() {
-                    const materiaId = this.value;
-                    const contenidosFiltrados = window.contenidos.filter(contenido => contenido.materia_id == materiaId);
-                    llenarOpciones("contenido", contenidosFiltrados);
-                });
-            })
-            .catch(error => console.error('Error al obtener los datos:', error));
-        };
-    </script>
-</body>
+						llenarOpciones("materia", data.asignaturas);
+						llenarOpciones("alumno", data.estudiantes);
+
+						window.contenidos = data.contenidos;
+
+						document
+							.getElementById("materia")
+							.addEventListener("change", function () {
+								const materiaId = this.value;
+								const contenidosFiltrados = window.contenidos.filter(
+									(contenido) => contenido.materia_id == materiaId
+								);
+								llenarOpciones("contenido", contenidosFiltrados);
+							});
+					})
+					.catch((error) =>
+						console.error("Error al obtener los datos:", error)
+					);
+			};
+		</script>
+	</body>
 </html>
