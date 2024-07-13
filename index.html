@@ -7,18 +7,21 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <img src="assets/images/logo.png" alt="logo institucional">
-            <p class="text">Iniciar sesión</p>
-            <form action="validar.php" method="POST" autocomplete="on">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
-                <input type="password" id="password" name="password" placeholder="Contraseña" required>
-                <button type="submit">Iniciar sesión</button>
-            </form>
-            <a href="password.html">Olvidé mi contraseña</a>
+
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="logo instituto">
+            <h2 class= "nombre_empresa">Instituto el Sabio</h2>
         </div>
-        
+        <nav>
+            <a href="" class="nav-link">Sobre Nosotros</a>
+            <a href="" class="nav-link">Excelencia Académica</a>
+            <a href="" class="nav-link">Integridad</a>
+            <a href="" class="nav-link">Respeto</a>
+            <a href="" class="nav-link">Inclusión</a>
+            <a href="" class="nav-link">Innovación</a>
+        </nav>
+        <!--
         <div class="info-container">
             <div class="info-section">
                 <h2>Sobre Nosotros</h2>
@@ -33,6 +36,21 @@
                 </ul>
             </div>
         </div>
+    -->
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <img src="assets/images/logo.png" alt="logo institucional">
+            <p class="text">Iniciar sesión</p>
+            <form action="validar.php" method="POST" autocomplete="on">
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            <a href="password.html">Olvidé mi contraseña</a>
+        </div>
+        
+        
     </div>
 
     <script>

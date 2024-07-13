@@ -7,41 +7,58 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="form-body">
-        <img src="assets/images/logo.png" alt="logo institucional">
-        <p class="text">Carga de Contenidos</p>
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="logo instituto">
+            <h2 class="nombre_empresa">Instituto el Sabio</h2>
+        </div>
+        <nav>
+            <a href="#" class="nav-link">Sobre Nosotros</a>
+            <a href="#" class="nav-link">Excelencia Académica</a>
+            <a href="#" class="nav-link">Integridad</a>
+            <a href="#" class="nav-link">Respeto</a>
+            <a href="#" class="nav-link">Inclusión</a>
+            <a href="#" class="nav-link">Innovación</a>
+        </nav>
+    </header>
 
-        <form class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
-            <label for="materia">Asignatura:</label>
-            <select name="materia" id="materia" required>
-                <option value="">Seleccione una asignatura</option>
-            </select>
-            <br>
-            
-            <label for="contenido">Contenido:</label>
-            <select name="contenido_id" id="contenido" required>
-                <option value="">Seleccione un contenido</option>
-            </select>
-            <br>
+    <div class="container">
+        <div class="form-container">
+            <img src="assets/images/logo.png" alt="logo institucional">
+            <p class="text">Carga de Contenidos</p>
 
-            <label for="alumno">Estudiante:</label>
-            <select name="estudiante_id" id="alumno" required>
-                <option value="">Seleccione el estudiante</option>
-            </select>
-            <br>
+            <form class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
+                <label for="materia">Asignatura:</label>
+                <select name="materia" id="materia" required>
+                    <option value="">Seleccione una asignatura</option>
+                </select>
+                <br>
 
-            <label for="estadoContenido">Nivel de Desempeño:</label>
-            <select name="nivel_desempeno" id="estadoContenido" required>
-                <option value="">Seleccione un nivel de desempeño</option>
-                <option value="Altamente Logrado">Altamente Logrado</option>
-                <option value="Logrado">Logrado</option>
-                <option value="Escasamente Logrado">Escasamente Logrado</option>
-                <option value="Pendiente">Pendiente</option>
-            </select>
-            <br>
+                <label for="contenido">Contenido:</label>
+                <select name="contenido_id" id="contenido" required>
+                    <option value="">Seleccione un contenido</option>
+                </select>
+                <br>
 
-            <button type="submit">Guardar</button>
-        </form>
+                <label for="alumno">Estudiante:</label>
+                <select name="estudiante_id" id="alumno" required>
+                    <option value="">Seleccione el estudiante</option>
+                </select>
+                <br>
+
+                <label for="estadoContenido">Nivel de Desempeño:</label>
+                <select name="nivel_desempeno" id="estadoContenido" required>
+                    <option value="">Seleccione un nivel de desempeño</option>
+                    <option value="Altamente Logrado">Altamente Logrado</option>
+                    <option value="Logrado">Logrado</option>
+                    <option value="Escasamente Logrado">Escasamente Logrado</option>
+                    <option value="Pendiente">Pendiente</option>
+                </select>
+                <br>
+
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
     </div>
 
     <script>
