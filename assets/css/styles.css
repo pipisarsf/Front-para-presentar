@@ -10,6 +10,11 @@ html, body {
   margin: 0;
 }
 
+:root {
+	--color-background: #1b4235;
+	--color-tarjetas: #73967a;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(27deg, rgb(52, 73, 94) 50%, rgb(44, 62, 80) 50%);
@@ -48,10 +53,6 @@ header {
   margin: 0 10px;
   text-decoration: none;
   font-size: 1rem;
-}
-
-.nav-link:hover {
-  transition: all 0.3s ease-out;
 }
 
 .main-content {
@@ -132,6 +133,58 @@ header {
 .opciones-form button:hover {
   background-color: #34495e;
 }
+.valores {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.valores li {
+  margin: 0 10px;
+}
+
+.valores li .boton {
+  display: block;
+  /* Estilos base del botón */
+  background-color: var(--color-tarjetas);
+  color: var(--color-background);
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.valores li .boton:hover,
+.valores li .boton:active {
+  background-color: var(--color-background);
+  box-shadow: 0 0 0 5px #1b42357a;
+  color: var(--color-tarjetas);
+}
+
+/*
+.boton {
+  /* Estilos base del botón 
+  background-color: var(--color-tarjetas);
+  color: var(--color-background);
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.boton:hover,
+.boton:active {
+  background-color: var(--color-background);
+	box-shadow: 0 0 0 5px #1b42357a;
+	color: var(--color-tarjetas);
+}
+*/
 
 @media (max-width: 768px) {
   .container {
