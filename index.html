@@ -7,72 +7,47 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
     <header>
         <div class="logo">
-            <!-- <img src="assets/images/logo.png" alt="logo instituto"> -->
-            <h2 class= "nombre_empresa">Instituto el Sabio</h2>
+            <img src="assets/images/logo.png" alt="logo instituto">
+            <h2 class="nombre_empresa">Instituto el Sabio</h2>
         </div>
-
         <nav class="valores">
-            
-                <button class="boton">Excelencia Académica</button>
-                <!-- <div class="descripcion">Nos comprometemos con la Excelencia Académica, promoviendo un entorno donde el aprendizaje y la innovación son fundamentales. Nuestro objetivo es proporcionar una educación de calidad que desafíe a nuestros estudiantes a alcanzar su máximo potencial, fomentando el pensamiento crítico, la creatividad y el amor por el conocimiento.</div> -->
-          
-                <button class="boton">Integridad</button>
-                <!-- <div class="descripcion">La Integridad es un valor central. Nos esforzamos por inculcar principios éticos y morales sólidos en nuestros estudiantes, promoviendo la honestidad, la transparencia y el respeto por la verdad. Creemos que una educación basada en la integridad prepara a nuestros estudiantes para ser ciudadanos responsables y líderes confiables en la sociedad.</div> -->
-        
-                <button class="boton">Respeto</button>
-                <!-- <div class="descripcion">El Respeto es la base de todas nuestras interacciones. Valoramos la diversidad y la individualidad, y fomentamos un ambiente donde cada persona es tratada con dignidad y consideración. Nuestro enfoque en el respeto ayuda a crear una comunidad escolar inclusiva y armoniosa, donde todos pueden aprender y crecer juntos.</div> -->
-           
-                <button class="boton">Inclusión</button>
-                <!-- <div class="descripcion">Estamos dedicados a la Inclusión, asegurando que todos los estudiantes, independientemente de sus antecedentes, habilidades o circunstancias, tengan acceso a una educación equitativa y de alta calidad. Promovemos la igualdad de oportunidades y trabajamos para eliminar barreras, creando un entorno donde cada estudiante se sienta valorado y apoyado.</div> -->
-           
-                <button class="boton">Innovación</button>
-                <!-- <div class="descripcion">La Innovación es una piedra angular. Fomentamos un espíritu de curiosidad y creatividad, alentando a nuestros estudiantes y docentes a explorar nuevas ideas y enfoques en el proceso educativo. A través de la innovación, buscamos preparar a nuestros estudiantes para enfrentar los desafíos del futuro con confianza y habilidades avanzadas.</div> -->
-            
+            <button class="boton">Excelencia Académica</button>
+            <!-- <div class="descripcion">Nos comprometemos con la Excelencia Académica, promoviendo un entorno donde el aprendizaje y la innovación son fundamentales. Nuestro objetivo es proporcionar una educación de calidad que desafíe a nuestros estudiantes a alcanzar su máximo potencial, fomentando el pensamiento crítico, la creatividad y el amor por el conocimiento.</div> -->
+            <button class="boton">Integridad</button>
+            <!-- <div class="descripcion">La Integridad es un valor central. Nos esforzamos por inculcar principios éticos y morales sólidos en nuestros estudiantes, promoviendo la honestidad, la transparencia y el respeto por la verdad. Creemos que una educación basada en la integridad prepara a nuestros estudiantes para ser ciudadanos responsables y líderes confiables en la sociedad.</div> -->
+            <button class="boton">Respeto</button>
+            <!-- <div class="descripcion">El Respeto es la base de todas nuestras interacciones. Valoramos la diversidad y la individualidad, y fomentamos un ambiente donde cada persona es tratada con dignidad y consideración. Nuestro enfoque en el respeto ayuda a crear una comunidad escolar inclusiva y armoniosa, donde todos pueden aprender y crecer juntos.</div> -->
+            <button class="boton">Inclusión</button>
+            <!-- <div class="descripcion">Estamos dedicados a la Inclusión, asegurando que todos los estudiantes, independientemente de sus antecedentes, habilidades o circunstancias, tengan acceso a una educación equitativa y de alta calidad. Promovemos la igualdad de oportunidades y trabajamos para eliminar barreras, creando un entorno donde cada estudiante se sienta valorado y apoyado.</div> -->
+            <button class="boton">Innovación</button>
+            <!-- <div class="descripcion">La Innovación es una piedra angular. Fomentamos un espíritu de curiosidad y creatividad, alentando a nuestros estudiantes y docentes a explorar nuevas ideas y enfoques en el proceso educativo. A través de la innovación, buscamos preparar a nuestros estudiantes para enfrentar los desafíos del futuro con confianza y habilidades avanzadas.</div> -->
         </nav>
-   
-       <!-- <nav>
-            <a href="" class="nav-link">Sobre Nosotros</a>
-            <a href="" class="nav-link">Excelencia Académica</a>
-            <a href="" class="nav-link">Integridad</a>
-            <a href="" class="nav-link">Respeto</a>
-            <a href="" class="nav-link">Inclusión</a>
-            <a href="" class="nav-link">Innovación</a>
-        </nav>-->
-        <!--
-        <div class="info-container">
-            <div class="info-section">
-                <h2>Sobre Nosotros</h2>
-                <p>Bienvenido al Instituto El Sabio. Nos dedicamos a proporcionar educación de calidad a nuestros estudiantes. Nuestra misión es fomentar el aprendizaje y el crecimiento personal de cada alumno.</p>
-                <h3>Nuestros Valores</h3>
-                <ul class="valores">
-                    <li><button onclick="mostrarValor('Excelencia Académica')">Excelencia Académica</button></li>
-                    <li><button onclick="mostrarValor('Integridad')">Integridad</button></li>
-                    <li><button onclick="mostrarValor('Respeto')">Respeto</button></li>
-                    <li><button onclick="mostrarValor('Inclusión')">Inclusión</button></li>
-                    <li><button onclick="mostrarValor('Innovación')">Innovación</button></li>
-                </ul>
-            </div>
-        </div>
-    -->
     </header>
     <div class="container">
         <div class="form-container">
             <img src="assets/images/logo.png" alt="logo institucional">
             <p class="text">Iniciar sesión</p>
             <form action="validar.php" method="POST" autocomplete="on">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
-                <input type="password" id="password" name="password" placeholder="Contraseña" required>
-                <button type="submit">Iniciar sesión</button>
+                <div class="inputbox">
+                    <input type="text" id="nombre" name="nombre" required />
+                    <span>Nombre de usuario</span>
+                    <i></i>
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="password" name="password" required />
+                    <span>Contraseña</span>
+                    <i></i>
+                </div>
+                <a class="forgot-password" href="password.html">¿Olvidaste tu contraseña?</a>
+                <div class="btn-container">
+                    <button type="submit">Iniciar sesión</button>
+                </div>
             </form>
-            <a href="password.html">Olvidé mi contraseña</a>
+          
         </div>
-        
-        
     </div>
-
     <script>
         function mostrarValor(valor) {
             alert('Valor seleccionado: ' + valor);
