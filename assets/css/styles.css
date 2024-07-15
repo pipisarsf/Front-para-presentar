@@ -132,6 +132,7 @@ header {
 
 .opciones-form button:hover {
   background-color: #34495e;
+  transition: 0.1s all;
 }
 
 .form-container button {
@@ -146,16 +147,17 @@ header {
 
 .form-container button:hover {
   background-color: #34495e;
+  transition: 0.1s all;
 }
 
 .valores {
-  list-style-type: none;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  padding: 0;
+  gap: 10px;
 }
 
-.valores button {
+.valores .boton {
   background-color: var(--color-tarjetas);
   color: #ffffff;
   border: none;
@@ -168,11 +170,31 @@ header {
   margin-right: 10px;
 }
 
-.valores button:hover,
-.valores button:active {
-  background-color: var(--color-background);
-  box-shadow: 0 0 0 5px #424d637a;
-  color: var(--color-tarjetas);
+
+.valores .boton:hover,
+.valores .boton:active {
+    background-color: var(--color-background);
+    box-shadow: 0 0 0 5px #424d637a;
+    color: var(--color-tarjetas);
+}
+
+
+.valores .descripcion {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.valores .boton:hover + .descripcion {
+  display: block;
 }
 
 .inputbox {
@@ -244,6 +266,10 @@ header {
   display: block;
   text-align: center;
   margin-top: 10px;
+}
+
+.valores button:hover + .descripcion {
+  display: block; /* Mostrar la descripción al pasar el cursor sobre el botón */
 }
 
 @media (max-width: 768px) {
