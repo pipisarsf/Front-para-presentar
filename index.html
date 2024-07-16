@@ -64,7 +64,7 @@
     
             botones.forEach(boton => {
                 const descripcion = boton.nextElementSibling; // Obtener el elemento siguiente, que es la descripción
-    
+                console.log(descripcion);
                 boton.addEventListener('mouseover', () => {
                     descripcion.style.display = 'block'; // Mostrar la descripción al pasar el cursor sobre el botón
                 });
