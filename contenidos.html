@@ -14,22 +14,27 @@
         </div>
 
         <nav class="valores">
-            
-            <button class="boton">Excelencia Académica</button>
-            <!-- <div class="descripcion">Nos comprometemos con la Excelencia Académica, promoviendo un entorno donde el aprendizaje y la innovación son fundamentales. Nuestro objetivo es proporcionar una educación de calidad que desafíe a nuestros estudiantes a alcanzar su máximo potencial, fomentando el pensamiento crítico, la creatividad y el amor por el conocimiento.</div> -->
-      
-            <button class="boton">Integridad</button>
-            <!-- <div class="descripcion">La Integridad es un valor central. Nos esforzamos por inculcar principios éticos y morales sólidos en nuestros estudiantes, promoviendo la honestidad, la transparencia y el respeto por la verdad. Creemos que una educación basada en la integridad prepara a nuestros estudiantes para ser ciudadanos responsables y líderes confiables en la sociedad.</div> -->
-    
-            <button class="boton">Respeto</button>
-            <!-- <div class="descripcion">El Respeto es la base de todas nuestras interacciones. Valoramos la diversidad y la individualidad, y fomentamos un ambiente donde cada persona es tratada con dignidad y consideración. Nuestro enfoque en el respeto ayuda a crear una comunidad escolar inclusiva y armoniosa, donde todos pueden aprender y crecer juntos.</div> -->
-       
-            <button class="boton">Inclusión</button>
-            <!-- <div class="descripcion">Estamos dedicados a la Inclusión, asegurando que todos los estudiantes, independientemente de sus antecedentes, habilidades o circunstancias, tengan acceso a una educación equitativa y de alta calidad. Promovemos la igualdad de oportunidades y trabajamos para eliminar barreras, creando un entorno donde cada estudiante se sienta valorado y apoyado.</div> -->
-       
-            <button class="boton">Innovación</button>
-            <!-- <div class="descripcion">La Innovación es una piedra angular. Fomentamos un espíritu de curiosidad y creatividad, alentando a nuestros estudiantes y docentes a explorar nuevas ideas y enfoques en el proceso educativo. A través de la innovación, buscamos preparar a nuestros estudiantes para enfrentar los desafíos del futuro con confianza y habilidades avanzadas.</div> -->
-        
+            <div>
+                <button class="boton">Excelencia Académica</button>
+                <div class="descripcion">Nos comprometemos con la Excelencia Académica, promoviendo un entorno donde el aprendizaje y la innovación son fundamentales. Nuestro objetivo es proporcionar una educación de calidad que desafíe a nuestros estudiantes a alcanzar su máximo potencial, fomentando el pensamiento crítico, la creatividad y el amor por el conocimiento.</div>
+            </div>
+            <div>
+                <button class="boton">Integridad</button>
+                <div class="descripcion">La Integridad es un valor central. Nos esforzamos por inculcar principios éticos y morales sólidos en nuestros estudiantes, promoviendo la honestidad, la transparencia y el respeto por la verdad. Creemos que una educación basada en la integridad prepara a nuestros estudiantes para ser ciudadanos responsables y líderes confiables en la sociedad.</div>
+            </div>
+            <div>
+                <button class="boton">Respeto</button>
+                <div class="descripcion">El Respeto es la base de todas nuestras interacciones. Valoramos la diversidad y la individualidad, y fomentamos un ambiente donde cada persona es tratada con dignidad y consideración. Nuestro enfoque en el respeto ayuda a crear una comunidad escolar inclusiva y armoniosa, donde todos pueden aprender y crecer juntos.</div>
+            </div>
+            <div>
+                <button class="boton">Inclusión</button>
+                <div class="descripcion">Estamos dedicados a la Inclusión, asegurando que todos los estudiantes, independientemente de sus antecedentes, habilidades o circunstancias, tengan acceso a una educación equitativa y de alta calidad. Promovemos la igualdad de oportunidades y trabajamos para eliminar barreras, creando un entorno donde cada estudiante se sienta valorado y apoyado.</div>
+            </div>
+            <div>
+                <button class="boton">Innovación</button>
+                <div class="descripcion">La Innovación es una piedra angular. Fomentamos un espíritu de curiosidad y creatividad, alentando a nuestros estudiantes y docentes a explorar nuevas ideas y enfoques en el proceso educativo. A través de la innovación, buscamos preparar a nuestros estudiantes para enfrentar los desafíos del futuro con confianza y habilidades avanzadas.</div>
+            </div>
+        </nav>
     </header>
 
     <div class="container">
@@ -37,25 +42,25 @@
             <img src="assets/images/logo.png" alt="logo institucional">
             <p class="text">Carga de Contenidos</p>
 
-            <form class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
+            <form id="contenidoForm" class="opciones-form" action="guardar_contenido.php" method="POST" enctype="multipart/form-data">
                 <label for="materia">Asignatura:</label>
                 <select name="materia" id="materia" required>
                     <option value="">Seleccione una asignatura</option>
                 </select>
                 <br>
-
+            
                 <label for="contenido">Contenido:</label>
                 <select name="contenido_id" id="contenido" required>
                     <option value="">Seleccione un contenido</option>
                 </select>
                 <br>
-
+            
                 <label for="alumno">Estudiante:</label>
                 <select name="estudiante_id" id="alumno" required>
                     <option value="">Seleccione el estudiante</option>
                 </select>
                 <br>
-
+            
                 <label for="estadoContenido">Nivel de Desempeño:</label>
                 <select name="nivel_desempeno" id="estadoContenido" required>
                     <option value="">Seleccione un nivel de desempeño</option>
@@ -65,11 +70,35 @@
                     <option value="Pendiente">Pendiente</option>
                 </select>
                 <br>
-
+            
                 <button type="submit">Guardar</button>
+                <button type="button" onclick="location.href='ver_registros.php';">Ver Registros</button>
             </form>
+                       
         </div>
     </div>
+
+    <div id="resultadoModal" class="modal">
+        <div class="modal-content" style="position: relative;">
+            <span class="close">&times;</span>
+            <p id="resultadoMensaje"></p>
+            <button class="volver">Volver</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="contacto">
+            <a href="https://www.instagram.com/bajo_llave_cba">
+                <img src="assets/images/ig.png" alt="Instagram" class="instagram-logo">
+            </a>
+            <a href="https://wa.me/message/BEAP2YX2KLMEC1">
+                <img src="assets/images/wp.png" alt="Instagram" class="instagram-logo">
+            </a>
+          
+            <p class="ubicacion">Ubicación: Calle Sin Nombre 123, B° Centro, Córdoba, Argentina</p>
+        </div>
+    </footer>
+    
 
     <script>
         function llenarOpciones(lista, datos) {
@@ -115,9 +144,53 @@
                 });
             })
             .catch(error => console.error('Error al obtener los datos:', error));
-        };
 
-       
+            document.getElementById('contenidoForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch('guardar_contenido.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const modal = document.getElementById('resultadoModal');
+                    const mensaje = document.getElementById('resultadoMensaje');
+                    mensaje.textContent = data.message;
+                    modal.style.display = 'block';
+
+                    if (data.success) {
+                        document.getElementById('contenidoForm').reset();
+                    }
+                })
+                .catch(error => console.error('Error al guardar el contenido:', error));
+            });
+
+            const closeModal = document.querySelector('.close');
+            const volverButton = document.querySelector('.volver');
+
+            if (closeModal && volverButton) {
+                closeModal.onclick = function() {
+                    document.getElementById('resultadoModal').style.display = 'none';
+                };
+
+                volverButton.onclick = function() {
+                    document.getElementById('resultadoModal').style.display = 'none';
+                    document.getElementById('contenidoForm').scrollIntoView({behavior: 'smooth'});
+                };
+
+                window.onclick = function(event) {
+                    const modal = document.getElementById('resultadoModal');
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                };
+            } else {
+                console.error('No se encontró el elemento del modal.');
+            }
+        };
     </script>
 </body>
 </html>

@@ -43,6 +43,17 @@ try {
         throw new Exception("Error: El estudiante con ID $estudiante_id no existe.");
     }
 
+     // Verificar si ya existe un registro con el mismo contenido y estudiante
+    $stmt_verificar = $conn->prepare("SELECT * FROM contenido_estudiante WHERE contenido_id = ? AND estudiante_id = ?");
+    $stmt_verificar->bind_param("ii", $contenido_id, $estudiante_id);
+    if (!$stmt_verificar->execute()) {
+        throw new Exception("Error al verificar la existencia del registro: " . $stmt_verificar->error);
+    }
+    $resultado_verificar = $stmt_verificar->get_result();
+    if ($resultado_verificar->num_rows > 0) {
+        throw new Exception("Ya existe un registro para el contenido y estudiante especificados.");
+    }
+
     // Insertar datos en la tabla contenido_estudiante
     $stmt = $conn->prepare("INSERT INTO contenido_estudiante (contenido_id, estudiante_id, nivel_desempeno) VALUES (?, ?, ?)");
     $stmt->bind_param("iis", $contenido_id, $estudiante_id, $nivel_desempeno);

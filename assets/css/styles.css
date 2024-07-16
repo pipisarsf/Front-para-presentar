@@ -28,12 +28,11 @@ body {
 header {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  /* height: 70px; */
-  background-color: #1f2b38;
   justify-content: space-between;
   align-items: center;
-  /* position: fixed; */
+  flex-wrap: wrap;
+  background-color: #1f2b38;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -61,7 +60,7 @@ header {
 
 .main-content {
   flex: 1;
-  padding-top: 70px; /* Espacio para el header */
+  padding-top: 60px; /* Espacio para el header */
   overflow-y: auto; /* Habilita el desplazamiento vertical */
   display: flex;
   justify-content: center;
@@ -77,24 +76,24 @@ header {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  padding: 40px 20px;
-  margin-top: 20px;
+  padding: 10px 20px;
+  margin-top: 100px;
 }
 
 .form-container {
   width: 100%;
-  max-width: 500px;
-  padding: 20px;
+  max-width: 450px;
+  padding: 10px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-container img {
   width: 100px;
   display: block;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 .form-container .text {
@@ -118,8 +117,8 @@ header {
 .opciones-form button {
   display: block;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 5px;
+  margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
@@ -145,8 +144,8 @@ header {
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 100%;
-  height: 50px;
-  margin-top: 25px;
+  height: 30px;
+  margin-top: 5px;
 }
 
 .form-container button:hover {
@@ -160,14 +159,14 @@ header {
   justify-content: center;
   gap: 10px;
   min-width: 600px;
-  height: 70px;
+  height: 50px;
   margin-top: 20px;
 }
 
 .valores > div {
- 
   position: relative;
 }
+
 .valores .boton {
   background-color: var(--color-tarjetas);
   color: #ffffff;
@@ -181,93 +180,90 @@ header {
   margin-right: 10px;
 }
 
-
 .valores .boton:hover,
 .valores .boton:active {
-    background-color: var(--color-background);
-    box-shadow: 0 0 0 5px #424d637a;
-    color: var(--color-tarjetas);
+  background-color: var(--color-background);
+  box-shadow: 0 0 0 5px #424d637a;
+  color: var(--color-tarjetas);
 }
-
 
 .valores .descripcion {
   display: none;
   position: absolute;
-  /* bottom: calc(100% + 10px); */
-
   top: 40px;
-  /* left: 0; */
   right: 0;
   width: 400px;
   background-color: rgba(0, 0, 0, 0.8);
   color: #ffffff;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-style: italic;
+  text-align: justify;
+  letter-spacing: 0.1em;
   z-index: 100;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .inputbox {
-	gap: 120px;
-	position: relative;
-	/* width: 325px; */
-	margin-top: 50px;
+  gap: 120px;
+  position: relative;
+  margin-top: 50px;
 }
 
 .inputbox:nth-child(2n) {
-	margin-top: 22px;
+  margin-top: 22px;
 }
 
 .inputbox input {
-	position: relative;
-	width: 100%;
-	padding: 20px 10px 10px;
-	background: transparent;
-	outline: none;
-	box-shadow: none;
-	border: none;
-	color: #b6c4d5;
-	font-size: 1em;
-	letter-spacing: 0.05em;
-	transition: 0.5s;
-	z-index: 10;
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #b6c4d5;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  z-index: 10;
 }
 
 .inputbox span {
-	position: absolute;
-	left: 2px;
-	top: 5px;
-	padding: 20px 10px 10px;
-	font-size: 1em;
-	color: var(--color-lineas);
-	letter-spacing: 00.05em;
-	transition: 0.3s;
-	pointer-events: none;
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  padding: 20px 10px 10px;
+  font-size: 1em;
+  color: var(--color-lineas);
+  letter-spacing: 00.05em;
+  transition: 0.3s;
+  pointer-events: none;
 }
 
 .inputbox input:valid ~ span,
 .inputbox input:focus ~ span {
-	color: var(--color-lineas);
-	transform: translateX(-10px) translateY(-34px);
-	font-size: 0, 75em;
+  color: var(--color-lineas);
+  transform: translateX(-10px) translateY(-34px);
+  font-size: 0.75em;
 }
 
 .inputbox i {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 1px;
-	border: 1px solid var(--color-lineas);
-	border-radius: 4px;
-	transition: 0.3s;
-	pointer-events: none;
-	z-index: 9;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  border: 1px solid var(--color-lineas);
+  border-radius: 4px;
+  transition: 0.3s;
+  pointer-events: none;
+  z-index: 9;
 }
 
 .inputbox input:valid ~ i,
 .inputbox input:focus ~ i {
-	height: 37px;
+  height: 37px;
 }
 
 .form-container a {
@@ -282,21 +278,102 @@ header {
   display: block; /* Mostrar la descripción al pasar el cursor sobre el botón */
 }
 
-@media only screen and ((max-device-width: 768px) or (max-width: 768px)) {
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
 
-  .valores{
-    
+.modal-content {
+  background-color: var(--color-background);
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  text-align: center;
+  border: 4px double var(--color-lineas);
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--color-tarjetas);
+  color: white;
+  padding: 5px 10px;
+  margin: 1px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.volver {
+  background-color: var(--color-tarjetas);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close:hover, .volver:hover {
+  background-color: #34495e;
+}
+
+footer {
+  background-color: var(--color-tarjetas);
+  color: white;
+  text-align: center;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.instagram-logo {
+  width: 20px;
+  height: auto;
+  display: block;
+}
+
+.instagram-logo:hover {
+  opacity: 0.8;
+}
+
+.contacto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacto a {
+  margin: 0 10px;
+}
+
+.ubicacion {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .valores {
     flex-direction: column;
     height: auto;
     min-width: 300px;
   }
 
-  header{
-    flex-direction: column;
-  }
-  
-
-   .form-container,
+  .form-container,
   .opciones-form {
     width: 100%;
     max-width: none;
